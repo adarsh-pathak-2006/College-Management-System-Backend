@@ -1,5 +1,4 @@
 from django.db import models
-from teacher.models import Teacher
 from django.contrib.auth.models import AbstractUser
 
 
@@ -39,7 +38,7 @@ class Course(models.Model):
 class Subject(models.Model):
     name=models.CharField(max_length=150)
     code=models.CharField(max_length=10)
-    teacher=models.ManyToManyField(Teacher)
+    teacher=models.ManyToManyField("teacher.Teacher")
     course=models.ForeignKey(Course, on_delete=models.CASCADE)
     department=models.OneToOneField(Department, on_delete=models.CASCADE)
 
