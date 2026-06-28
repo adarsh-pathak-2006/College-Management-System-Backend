@@ -50,7 +50,7 @@ class Subject(models.Model):
     code=models.CharField(max_length=10)
     teacher=models.ManyToManyField("teacher.Teacher")
     course=models.ForeignKey(Course, on_delete=models.CASCADE)
-    department=models.OneToOneField(Department, on_delete=models.CASCADE)
+    department=models.ForeignKey(Department, on_delete=models.CASCADE)
 
 
     def __str__(self):

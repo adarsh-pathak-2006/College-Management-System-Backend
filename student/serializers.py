@@ -11,7 +11,7 @@ class StudentSerializer(ModelSerializer):
     department=DepartmentSerializer()
     class Meta:
         model=Student
-        fields=['user', 'rollno', 'name', 'email', 'phone', 'date_of_birth', 'gender', 'address', 'course', 'department', 'admission_date']
+        fields=['user', 'rollno', 'phone', 'date_of_birth', 'gender', 'address', 'course', 'department', 'admission_date']
 
 
 class AttendanceSerializer(ModelSerializer):

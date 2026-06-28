@@ -8,7 +8,7 @@ class FeeStructure(models.Model):
     amount=models.PositiveIntegerField()
 
     def __str__(self):
-        return self.course
+        return self.course.name
 
 class FeePayment(models.Model):
     PAID="PAID"
@@ -16,7 +16,7 @@ class FeePayment(models.Model):
     PARTIAL="PARTIAL"
     STATUS_CHOICES=[(PAID, 'paid'),(PENDING,'pending'),(PARTIAL, 'partial')]
 
-    student=models.OneToOneField("student.Student", on_delete=models.CASCADE)
+    student=models.ForeignKey("student.Student", on_delete=models.CASCADE)
     feestructure=models.ForeignKey(FeeStructure, on_delete=models.CASCADE)
     amount_paid=models.PositiveIntegerField()
     payment_date=models.DateField()
