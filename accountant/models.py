@@ -21,7 +21,7 @@ class FeePayment(models.Model):
     feestructure=models.ForeignKey(FeeStructure, on_delete=models.CASCADE)
     amount_paid=models.PositiveIntegerField()
     payment_date=models.DateField()
-    transactionid=models.CharField(max_length=50)
+    transactionid=models.CharField(max_length=50, null=True)
     status=models.CharField(max_length=10, choices=STATUS_CHOICES)
 
     def __str__(self):
