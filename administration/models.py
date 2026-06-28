@@ -57,4 +57,13 @@ class Notice(models.Model):
         return self.title
 
 
+class Exam(models.Model):
+    name=models.CharField(max_length=100)
+    start_date=models.DateField()
+    End_date=models.DateField()
+    
+
+    def __str__(self):
+        return self.name
+
     
