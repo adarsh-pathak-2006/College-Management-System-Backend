@@ -7,6 +7,9 @@ from administration.models import Department, Course, Subject, Notice, Exam
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from django.contrib.auth import get_user_model
+from administration.permissions import IsAdmin, IsTeacherorAdmin
+from rest_framework.permissions import IsAuthenticated
+
 
 User=get_user_model()
 
@@ -39,6 +42,12 @@ class RegisterView(View):
 
 
 class DepartmentAPI(APIView):
+    def get_permissions(self):
+
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+
+        return [IsAdmin()]
     def get(self, request):
         data=Department.objects.all()
         serial=DepartmentSerializer(data, many=True)
@@ -54,6 +63,12 @@ class DepartmentAPI(APIView):
 
 
 class DepartmentAPI_individual(APIView):
+    def get_permissions(self):
+
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+
+        return [IsAdmin()]
     def get(self, request, pk):
         data=get_object_or_404(Department, id=pk)
         serial=DepartmentSerializer(data)
@@ -76,6 +91,12 @@ class DepartmentAPI_individual(APIView):
 
 
 class CourseAPI(APIView):
+    def get_permissions(self):
+
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+
+        return [IsAdmin()]
     def get(self, request):
         data=Course.objects.all()
         serial=CourseSerializer(data, many=True)
@@ -90,6 +111,12 @@ class CourseAPI(APIView):
             return Response({ 'message':'invalid input' })
         
 class CourseAPI_individual(APIView):
+    def get_permissions(self):
+
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+
+        return [IsAdmin()]
     def get(self, request, pk):
         instance=get_object_or_404(Course, id=pk)
         serial=CourseSerializer(instance)
@@ -111,6 +138,12 @@ class CourseAPI_individual(APIView):
 
 
 class SubjectAPI(APIView):
+    def get_permissions(self):
+
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+
+        return [IsTeacherorAdmin()]
     def get(self, request):
         data=Subject.objects.all()
         serial=SubjectSerializer(data, many=True)
@@ -125,6 +158,12 @@ class SubjectAPI(APIView):
             return Response({ 'message':'invalid input' })
         
 class SubjectAPI_individual(APIView):
+    def get_permissions(self):
+
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+
+        return [IsTeacherorAdmin()]
     def get(self, request, pk):
         data=get_object_or_404(Subject, id=pk)
         serial=SubjectSerializer(data)
@@ -146,17 +185,39 @@ class SubjectAPI_individual(APIView):
     
 
 class NoticeAPI(ListCreateAPIView):
+    def get_permissions(self):
+
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+
+        return [IsTeacherorAdmin()]
     queryset=Notice.objects.all()
     serializer_class=NoticeSerializer
 
 class NoticeAPI_individual(RetrieveUpdateDestroyAPIView):
+    def get_permissions(self):
+
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+
+        return [IsTeacherorAdmin()]
     queryset=Notice.objects.all()
     serializer_class=NoticeSerializer
 
 class ExamAPI(ListCreateAPIView):
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+        return [IsTeacherorAdmin()]
+
     queryset=Exam.objects.all()
     serializer_class=ExamSerializer
 
 class ExamAPI_individual(RetrieveUpdateDestroyAPIView):
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+        return [IsTeacherorAdmin()]
+
     queryset=Exam.objects.all()
     serializer_class=ExamSerializer
