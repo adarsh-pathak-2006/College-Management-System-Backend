@@ -1,5 +1,6 @@
 from django import forms
 from administration.models import User
+from django.forms import ModelForm
 
 
 class RegisterForm(forms.Form):

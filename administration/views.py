@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from administration.forms import RegisterForm
+from administration.forms import RegisterForm, LoginForm
 from rest_framework.views import APIView
 from administration.serializers import DepartmentSerializer, CourseSerializer, SubjectSerializer, NoticeSerializer, ExamSerializer
 from administration.models import Department, Course, Subject, Notice, Exam
@@ -39,6 +39,8 @@ class RegisterView(View):
                     return redirect('register')
             else:
                 return render(request, 'register.html', { 'pass_err':'enter the same password in both the blocks' })
+            
+
 
 
 class DepartmentAPI(APIView):
