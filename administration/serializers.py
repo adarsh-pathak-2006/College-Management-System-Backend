@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from administration.models import Department, Course, Subject, Notice, Semester
-from django.contrib.auth.models import User
+from administration.models import User
 from teacher.serializers import TeacherSerializer
 from administration.models import Exam
 

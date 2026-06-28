@@ -1,6 +1,5 @@
 from django.db import models
 from administration.models import Course, Semester
-from student.models import Student
 
 
 class FeeStructure(models.Model):
@@ -17,7 +16,7 @@ class FeePayment(models.Model):
     PARTIAL="PARTIAL"
     STATUS_CHOICES=[(PAID, 'paid'),(PENDING,'pending'),(PARTIAL, 'partial')]
 
-    student=models.OneToOneField(Student, on_delete=models.CASCADE)
+    student=models.OneToOneField("student.Student", on_delete=models.CASCADE)
     feestructure=models.ForeignKey(FeeStructure, on_delete=models.CASCADE)
     amount_paid=models.PositiveIntegerField()
     payment_date=models.DateField()

@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 from administration.models import Department, Course
 from administration.models import Subject
-from teacher.models import Teacher
 
 
 class Student(models.Model):
@@ -33,7 +32,7 @@ class Attendance(models.Model):
 
     student=models.ForeignKey(Student, on_delete=models.CASCADE)
     subject=models.ForeignKey(Subject, on_delete=models.CASCADE)
-    teacher=models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    teacher=models.ForeignKey("teacher.Teacher", on_delete=models.CASCADE)
     date=models.DateField()
     status=models.CharField(max_length=1, choices=STATUS_CHOICES)
 
@@ -42,4 +41,4 @@ class Attendance(models.Model):
 
 
     def __str__(self):
-        return self.date
+        return str(self.date)
