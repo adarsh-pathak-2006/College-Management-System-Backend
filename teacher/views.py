@@ -14,7 +14,7 @@ class TeacherAPI_individual(RetrieveUpdateDestroyAPIView):
     queryset=Teacher.objects.all()
     serializer_class=TeacherSerializer
 
-class Result(ListCreateAPIView):
+class ResultAPI(ListCreateAPIView):
     queryset=Result.objects.all()
     serializer_class=ResultSerializer
 
