@@ -11,22 +11,22 @@ class DepartmentSerializer(ModelSerializer):
 
 
 class CourseSerializer(ModelSerializer):
-    department=DepartmentSerializer()
+    department=DepartmentSerializer(read_only=True)
     class Meta:
         model=Course
         fields=['name', 'duration', 'department']
 
 class SubjectSerializer(ModelSerializer):
-    course=CourseSerializer()
-    department=DepartmentSerializer()
-    teacher=TeacherSerializer()
+    course=CourseSerializer(read_only=True)
+    department=DepartmentSerializer(read_only=True)
+    teacher=TeacherSerializer(read_only=True)
     class Meta:
         model=Subject
         fields=['name', 'code', 'teacher', 'course', 'department']
 
 
 class NoticeSerializer(ModelSerializer):
-    department=DepartmentSerializer()
+    department=DepartmentSerializer(read_only=True)
     class Meta:
         model=Notice
         fields=['title', 'description', 'department', 'created_at']
@@ -43,7 +43,7 @@ class ExamSerializer(ModelSerializer):
         fields=['name', 'start_date', 'End_date']
 
 class Semester_serializer(ModelSerializer):
-    course=CourseSerializer()
+    course=CourseSerializer(read_only=True)
     class Meta:
         model=Semester
         fields='__all__'

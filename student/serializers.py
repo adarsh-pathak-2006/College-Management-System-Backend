@@ -6,18 +6,18 @@ from teacher.serializers import TeacherSerializer
 
 
 class StudentSerializer(ModelSerializer):
-    user=UserSerializer()
-    course=CourseSerializer()
-    department=DepartmentSerializer()
+    user=UserSerializer(read_only=True)
+    course=CourseSerializer(read_only=True)
+    department=DepartmentSerializer(read_only=True)
     class Meta:
         model=Student
         fields=['user', 'rollno', 'phone', 'date_of_birth', 'gender', 'address', 'course', 'department', 'admission_date']
 
 
 class AttendanceSerializer(ModelSerializer):
-    student=StudentSerializer()
-    subject=SubjectSerializer()
-    teacher=TeacherSerializer()
+    student=StudentSerializer(read_only=True)
+    subject=SubjectSerializer(read_only=True)
+    teacher=TeacherSerializer(read_only=True)
     class Meta:
         model=Attendance
         fields='__all__'
