@@ -1,3 +1,5 @@
 from django.contrib import admin
+from accountant.models import *
 
-# Register your models here.
+admin.site.register(FeeStructure)
+admin.site.register(FeePayment)

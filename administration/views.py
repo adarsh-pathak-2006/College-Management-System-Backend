@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from administration.forms import RegisterForm
 from rest_framework.views import APIView
-from administration.serializers import DepartmentSerializer, CourseSerializer, SubjectSerializer, NoticeSerializer
-from administration.models import Department, Course, Subject, Notice
+from administration.serializers import DepartmentSerializer, CourseSerializer, SubjectSerializer, NoticeSerializer, ExamSerializer
+from administration.models import Department, Course, Subject, Notice, Exam
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from django.contrib.auth import get_user_model
@@ -152,3 +152,11 @@ class NoticeAPI(ListCreateAPIView):
 class NoticeAPI_individual(RetrieveUpdateDestroyAPIView):
     queryset=Notice.objects.all()
     serializer_class=NoticeSerializer
+
+class ExamAPI(ListCreateAPIView):
+    queryset=Exam.objects.all()
+    serializer_class=ExamSerializer
+
+class ExamAPI_individual(RetrieveUpdateDestroyAPIView):
+    queryset=Exam.objects.all()
+    serializer_class=ExamSerializer

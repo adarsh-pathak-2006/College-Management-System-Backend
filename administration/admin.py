@@ -5,4 +5,5 @@ admin.site.register(Course)
 admin.site.register(Department)
 admin.site.register(Subject)
 admin.site.register(Notice)
-
+admin.site.register(Exam)
+admin.site.register(Semester)

@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from administration.models import Department, Course
+from administration.models import Subject
+from teacher.models import Teacher
 
 
 class Student(models.Model):
@@ -17,3 +19,27 @@ class Student(models.Model):
     def __str__(self):
         return self.rollno
     
+
+class Attendance(models.Model):
+    PRESENT = "P"
+    ABSENT = "A"
+    LEAVE = "L"
+
+    STATUS_CHOICES = [
+        (PRESENT, "Present"),
+        (ABSENT, "Absent"),
+        (LEAVE, "Leave"),
+    ]
+
+    student=models.ForeignKey(Student, on_delete=models.CASCADE)
+    subject=models.ForeignKey(Subject, on_delete=models.CASCADE)
+    teacher=models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    date=models.DateField()
+    status=models.CharField(max_length=1, choices=STATUS_CHOICES)
+
+    class Meta:
+        unique_together=('student', 'subject', 'date')
+
+
+    def __str__(self):
+        return self.date

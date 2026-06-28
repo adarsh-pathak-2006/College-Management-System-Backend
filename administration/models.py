@@ -34,6 +34,16 @@ class Course(models.Model):
     def __str__(self):
         return self.name
     
+class Semester(models.Model):
+    number=models.PositiveIntegerField()
+    course=models.ForeignKey(Course, on_delete=models.CASCADE)
+    session=models.CharField(max_length=10)
+    isactive=models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.course} semester - {self.number}"
+
+    
 
 class Subject(models.Model):
     name=models.CharField(max_length=150)
@@ -66,4 +76,4 @@ class Exam(models.Model):
     def __str__(self):
         return self.name
 
-    
+
